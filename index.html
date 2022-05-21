@@ -1,9 +1,59 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>T</title>
-    </head>
-    <body>
-        <h1>U</h1>
-    </body>
+<html lang="pl">
+<head>
+    <title>ACO TABELE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <div class="background">
+
+    </div>
+    <div class="fr">
+        <h4>Szukajka kodzików</h4>
+        <input type="number" placeholder="Numer lokalu" id="lknum">
+        <input type="number" placeholder="Kod lokalu" id="lkpin">
+        <button onclick="searchCode()">&nbsp;</button>
+        <br>
+        <div id="outpt">
+        
+      </div>
+    </div>
+    <script>
+        var codeTable;
+var httpRequest = new XMLHttpRequest();
+
+function searchCode() {
+    document.getElementById('outpt').innerHTML = "Czekaj..."
+    httpRequest.open("GET", "table.json", true);
+    httpRequest.send();
+    httpRequest.addEventListener("readystatechange", function() {
+    if (this.readyState === this.DONE) {
+        codeTable = JSON.parse(this.response);
+        getCode(document.getElementById('lknum').value, document.getElementById('lkpin').value);
+    }
+});
+}
+
+async function getCode(loc, cod) {
+    let similararray = []
+    document.getElementById('outpt').innerHTML = ""
+    for(let i=0; i<9999; i++) {
+       if(codeTable[i][loc] == cod) {
+           
+            similararray.push[i]
+            document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br><a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:${i}</a>`
+       } else {
+
+       }
+
+    }
+    setTimeout(() => {
+        document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br><br>Koniec wynikĂłw.`
+    }, 500);
+}
+    </script>
+</body>
 </html>
+
+
