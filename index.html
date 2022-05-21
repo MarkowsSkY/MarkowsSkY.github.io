@@ -11,9 +11,11 @@
     </div>
     <div class="fr">
         <h4>Szukajka kodzików</h4>
+        <br>
         <input type="number" placeholder="Numer lokalu" id="lknum">
         <input type="number" placeholder="Kod lokalu" id="lkpin">
         <button onclick="searchCode()">&nbsp;</button>
+        <br>
         <br>
         <div id="outpt">
         
@@ -36,17 +38,41 @@ function searchCode() {
 }
 
 async function getCode(loc, cod) {
+    let excount = 0;
     let similararray = []
     document.getElementById('outpt').innerHTML = ""
     for(let i=0; i<9999; i++) {
        if(codeTable[i][loc] == cod) {
            
             similararray.push[i]
-            document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br><a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:${i}</a>`
+
+            if(excount > 4) {
+                excount = 0;
+                if(i > 999) {
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br>&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:${i}</a>&nbsp;`
+            } else if(i > 99){
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br>&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:0${i}</a>&nbsp;`
+            } else if(i > 9){
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br>&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:00${i}</a>&nbsp;`
+            } else {
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br>&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:000${i}</a>&nbsp;`
+            }
+            } else{
+                if(i > 999) {
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:${i}</a>&nbsp;`
+            } else if(i > 99){
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:0${i}</a>&nbsp;`
+            } else if(i > 9){
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:00${i}</a>&nbsp;`
+            } else {
+                document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `&nbsp;<a href="http://aco.com.pl/aco_generator/eng.codetable.php?instalator=${i}&Submit1=">T:000${i}</a>&nbsp;`
+            }
+
+            }
+            excount++;
        } else {
 
        }
-
     }
     setTimeout(() => {
         document.getElementById('outpt').innerHTML =  document.getElementById('outpt').innerHTML + `<br><br>Koniec wyników.`
